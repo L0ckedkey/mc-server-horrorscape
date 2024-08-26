@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mc:
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
+    ports:
+      - "25566:25565/tcp"
+      - "25566:25565/udp"
+    environment:
+      EULA: "TRUE"
+      ONLINE_MODE: "FALSE"
+      MAX_MEMORY: 6G
+      MAX_PLAYER: 10
+      MOD_PLATFORM: MODRINTH
+      MODRINTH_MODPACK: /modpacks/horrorscape.mrpack
+    restart: unless-stopped
+    volumes:
+      # attach the relative directory 'data' to the container's /data path
+      - ./data:/data
+      - ./modpacks:/modpacks:ro
